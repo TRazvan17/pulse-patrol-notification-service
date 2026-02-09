@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package notification.v1;
+
+option go_package = "github.com/TRazvan17/pulse-patrol-notification-service/proto;proto";
+
+service NotificationService {
+  rpc HealthCheck(HealthCheckRequest) returns (HealthCheckResponse);
+  rpc SendNotification(SendNotificationRequest) returns (SendNotificationResponse);
+}
+
+message HealthCheckRequest {}
+message HealthCheckResponse {
+  string status = 1;
+}
+
+message SendNotificationRequest {
+  string to = 1;
+  string message = 2;
+}
+
+message SendNotificationResponse {
+  string id = 1;
+  string status = 2;
+}
