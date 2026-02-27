@@ -37,7 +37,24 @@ protoc \
 
 go run ./cmd/grpc
 
-## Health Check
+## Health Check.  
 grpcurl -plaintext localhost:9090 notification.v1.NotificationService/HealthCheck
 #SendNotification
 grpcurl -plaintext -d '{"to":"lector","message":"hello from grpc"}' \ localhost:9090 notification.v1.NotificationService/SendNotification
+
+---
+
+## Performance Testing (k6)
+
+### Test Scenario
+- Tool: k6
+- Virtual Users (VUs): 50
+- Duration: 30s
+- Endpoint tested: POST /notifications
+
+### Run REST service
+```bash
+go run ./cmd/rest
+
+### Run Performance Test
+k6 run perf/k6-rest.js
